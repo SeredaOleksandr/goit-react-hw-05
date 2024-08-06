@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
-import { getNavlinkClass } from '../../helpers/getNavlinkClass';
+// import { getNavlinkClass } from '../../helpers/getNavlinkClass';
+
+const getNavlinkClass = (s, { isActive }) => (isActive ? s.active : s.inactive);
 
 const Navigation = () => {
   return (
