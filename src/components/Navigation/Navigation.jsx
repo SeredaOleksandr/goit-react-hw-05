@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
+import { getNavlinkClass } from '../../helpers/getNavlinkClass';
 
 const Navigation = () => {
   return (
@@ -9,7 +10,7 @@ const Navigation = () => {
           <li>
             <NavLink
               to="/"
-              className={({ isActive }) => getNavlinkClass(css, { isActive })}
+              className={({ isActive }) => getNavlinkClass(s, { isActive })}
             >
               Home
             </NavLink>
@@ -17,7 +18,7 @@ const Navigation = () => {
           <li>
             <NavLink
               to="/movies"
-              className={({ isActive }) => getNavlinkClass(css, { isActive })}
+              className={({ isActive }) => getNavlinkClass(s, { isActive })}
             >
               Movies
             </NavLink>

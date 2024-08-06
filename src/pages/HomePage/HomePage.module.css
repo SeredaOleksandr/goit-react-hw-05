@@ -1,0 +1,15 @@
+/* .ul_movie_container {
+  display: flex;
+  gap: 10px;
+} */
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+}
+
+.error {
+  text-align: center;
+  font-size: 20px;
+  color: red;
+}
