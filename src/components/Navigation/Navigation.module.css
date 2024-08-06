@@ -1,0 +1,31 @@
+.navigation {
+  /* border-bottom: 2px solid rgb(94, 172, 221); */
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  -webkit-box-shadow: -1px 11px 17px -3px rgba(0, 0, 0, 0.31);
+  box-shadow: -1px 11px 17px -3px rgba(0, 0, 0, 0.31);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 999;
+  padding: 16px 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgb(48, 181, 221);
+}
+
+.link {
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: aquamarine;
+}
+
+.link.active {
+  color: rgb(3, 5, 116);
+}

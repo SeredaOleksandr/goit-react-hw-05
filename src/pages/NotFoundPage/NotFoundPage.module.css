@@ -1,0 +1,19 @@
+.cover {
+  text-align: center;
+  color: red;
+  display: flex;
+  gap: 20px;
+}
+
+.error_btn {
+  color: red;
+  padding: auto;
+}
+
+.error_message {
+  font-size: 20px;
+}
+
+.error_big {
+  font-size: 200px;
+}
