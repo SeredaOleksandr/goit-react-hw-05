@@ -16,7 +16,7 @@ import MovieReviews from '../../components/MovieReviews/MovieReviews';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import clsx from 'clsx';
 import { Toaster } from 'react-hot-toast';
-import styles from './MovieDetailsPage.module.css';
+import s from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -52,45 +52,47 @@ const MovieDetailsPage = () => {
 
   return (
     <>
-      <button className={clsx(memoizedError ? styles.none : styles.ok)}>
+      <button className={clsx(memoizedError ? s.none : s.ok)}>
         <Link to={backLink.current}>Go back</Link>
       </button>
       {memoizedLoading && <p>Loading...</p>}
       {memoizedError && <NotFoundPage />}
       {!memoizedError && (
-        <div className={styles.container}>
-          <img
-            className={styles.movie_img}
-            src={`https://image.tmdb.org/t/p/w500${memoizedDetails.poster_path}`}
-            alt={memoizedDetails.title}
-          />
-          <div>
-            <h2>{memoizedDetails.title}</h2>
-            <p>
-              User Score:{' '}
-              {memoizedDetails.vote_average
-                ? Math.ceil(memoizedDetails.vote_average * 10)
-                : 0}
-              %
-            </p>
-            <h3>Overview</h3>
-            <p>{memoizedDetails.overview}</p>
-            <h3>Genres</h3>
-            {memoizedDetails.genres && memoizedDetails.genres.length > 0 ? (
-              <div className={styles.genre_container}>
-                {memoizedDetails.genres.map(genre => (
-                  <p key={genre.id}>{genre.name}</p>
-                ))}
-              </div>
-            ) : (
-              <p>No genres available</p>
-            )}
+        <div>
+          <h2>{memoizedDetails.title}</h2>
+          <div className={s.container}>
+            <img
+              className={s.movie_img}
+              src={`https://image.tmdb.org/t/p/w500${memoizedDetails.poster_path}`}
+              alt={memoizedDetails.title}
+            />
+            <div className={s.text_container}>
+              <h3>Genres</h3>
+              {memoizedDetails.genres && memoizedDetails.genres.length > 0 ? (
+                <div className={s.genre_container}>
+                  {memoizedDetails.genres.map(genre => (
+                    <p key={genre.id}>{genre.name}</p>
+                  ))}
+                </div>
+              ) : (
+                <p>No genres available</p>
+              )}
+              <p>
+                User Score:{' '}
+                {memoizedDetails.vote_average
+                  ? Math.ceil(memoizedDetails.vote_average * 10)
+                  : 0}
+                %
+              </p>
+              <h3>Overview</h3>
+              <p>{memoizedDetails.overview}</p>
+            </div>
           </div>
         </div>
       )}
-      <div className={clsx(memoizedError ? styles.none : styles.ok)}>
+      <div className={clsx(memoizedError ? s.none : s.ok)}>
         <p>Additional information</p>
-        <ul>
+        <ul className={s.wraper_link}>
           <li>
             <NavLink to="cast">Cast</NavLink>
           </li>

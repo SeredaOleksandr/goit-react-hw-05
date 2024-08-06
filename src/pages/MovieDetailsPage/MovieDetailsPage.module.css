@@ -1,0 +1,45 @@
+.container {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 20px;
+  width: 700px;
+  text-align: left;
+}
+
+.genre_container {
+  display: flex;
+  gap: 15px;
+}
+
+.movie_img {
+  width: 300px;
+}
+
+.text_container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+button {
+  margin-bottom: 8px;
+}
+
+.none {
+  display: none;
+}
+
+.ok {
+  display: block;
+}
+
+.wraper_link {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
