@@ -17,7 +17,7 @@ const MoviesPage = () => {
       <h1>Search Movies</h1>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
+          type="search"
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search movies"

@@ -5,19 +5,19 @@ import MovieList from '../../components/MovieList/MovieList';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setIsLoading(true);
       try {
-        setLoading(true);
-        const trendingMovies = await fetchTrendingMovies();
-        setMovies(trendingMovies);
+        const fetchedMovies = await fetchTrendingMovies();
+        setMovies(fetchedMovies);
       } catch (error) {
         setError(error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
     fetchMovies();
@@ -25,11 +25,10 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Trending today</h1>
+      <h1 className={s.title}>Trending today</h1>
       <MovieList movies={movies} />
-      {loading && <p className={s.loading}>Loading...</p>}
-      {error && <p className={s.error}>Error: {error}</p>}
-      {/* <MovieList results={movies} /> */}
+      {isLoading && <p className={s.loading}>Loading...</p>}
+      {error && <p className={s.error}>Error: {error.message}</p>}
     </div>
   );
 };
