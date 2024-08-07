@@ -1,8 +1,19 @@
+.wrapper {
+  padding-bottom: 60px;
+}
+
+h2 {
+  text-align: center;
+}
+
 .container {
+  margin: 0 auto;
   margin-top: 8px;
   margin-bottom: 8px;
   display: flex;
   gap: 20px;
+  /* align-items: center;
+  justify-content: center; */
   width: 700px;
   text-align: left;
 }
@@ -28,6 +39,10 @@ h3 {
 
 button {
   margin-bottom: 8px;
+}
+
+.sub_title {
+  text-align: center;
 }
 
 .none {

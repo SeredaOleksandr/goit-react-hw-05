@@ -5,6 +5,8 @@ import {
   NavLink,
   Outlet,
   useLocation,
+  Routes,
+  Route,
 } from 'react-router-dom';
 import {
   fetchMovieDetails,
@@ -17,22 +19,31 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import clsx from 'clsx';
 import { Toaster } from 'react-hot-toast';
 import s from './MovieDetailsPage.module.css';
+import BackLink from '../../components/BackLink/BackLink';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [details, setDetails] = useState({});
+  const [credits, setCredits] = useState({});
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const location = useLocation();
-  const backLink = useRef(location.state?.from ?? '/');
+  const backLinkHref = useRef(location.state ?? '/movies');
 
   useEffect(() => {
     const getDetails = async id => {
       try {
         setLoading(true);
         setError(false);
-        const data = await fetchMovieDetails(id);
-        setDetails(data);
+        const [movieDetails, movieCredits, movieReviews] = await Promise.all([
+          fetchMovieDetails(id),
+          fetchMovieCredits(id),
+          fetchMovieReviews(id),
+        ]);
+        setDetails(movieDetails);
+        setCredits(movieCredits);
+        setReviews(movieReviews);
       } catch (error) {
         setError(true);
         console.error('Error fetching movie details:', error);
@@ -47,14 +58,14 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const memoizedDetails = useMemo(() => details, [details]);
+  const memoizedCredits = useMemo(() => credits, [credits]);
+  const memoizedReviews = useMemo(() => reviews, [reviews]);
   const memoizedLoading = useMemo(() => loading, [loading]);
   const memoizedError = useMemo(() => error, [error]);
 
   return (
-    <>
-      <button className={clsx(memoizedError ? s.none : s.ok)}>
-        <Link to={backLink.current}>Go back</Link>
-      </button>
+    <div className="s.wrapper">
+      <BackLink link={backLinkHref.current}>Go Back!</BackLink>
       {memoizedLoading && <p>Loading...</p>}
       {memoizedError && <NotFoundPage />}
       {!memoizedError && (
@@ -91,7 +102,7 @@ const MovieDetailsPage = () => {
         </div>
       )}
       <div className={clsx(memoizedError ? s.none : s.ok)}>
-        <p>Additional information</p>
+        <h3 className={s.sub_title}>Additional information</h3>
         <ul className={s.wraper_link}>
           <li>
             <NavLink to="cast">Cast</NavLink>
@@ -102,10 +113,20 @@ const MovieDetailsPage = () => {
         </ul>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="cast"
+            element={<MovieCast cast={memoizedCredits.cast} />}
+          />
+          <Route
+            path="reviews"
+            element={<MovieReviews reviews={memoizedReviews} />}
+          />
+        </Routes>
         <Outlet />
       </Suspense>
       <Toaster />
-    </>
+    </div>
   );
 };
 
