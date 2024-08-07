@@ -1,5 +1,12 @@
 .wrapper {
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
+}
+
+.movie_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 h2 {

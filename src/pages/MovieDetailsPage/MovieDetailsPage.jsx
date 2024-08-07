@@ -64,12 +64,12 @@ const MovieDetailsPage = () => {
   const memoizedError = useMemo(() => error, [error]);
 
   return (
-    <div className="s.wrapper">
+    <div className={s.wrapper}>
       <BackLink link={backLinkHref.current}>Go Back!</BackLink>
       {memoizedLoading && <p>Loading...</p>}
       {memoizedError && <NotFoundPage />}
       {!memoizedError && (
-        <div>
+        <div className={s.movie_wrapper}>
           <h2>{memoizedDetails.title}</h2>
           <div className={s.container}>
             <img
